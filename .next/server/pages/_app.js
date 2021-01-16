@@ -111,8 +111,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("cDcd");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _styles_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("L1EO");
-/* harmony import */ var _styles_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_styles_css__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _context_ProductsContext__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("mk7R");
+/* harmony import */ var _context_CartContext__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("xKSj");
+/* harmony import */ var _styles_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("L1EO");
+/* harmony import */ var _styles_css__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_styles_css__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _fortawesome_fontawesome_svg_core_styles_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("VAPu");
+/* harmony import */ var _fortawesome_fontawesome_svg_core_styles_css__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_fortawesome_fontawesome_svg_core_styles_css__WEBPACK_IMPORTED_MODULE_5__);
 
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -123,12 +127,28 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
+
+
 function MyApp({
   Component,
   pageProps
 }) {
-  return /*#__PURE__*/Object(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__["jsx"])(Component, _objectSpread({}, pageProps));
+  return /*#__PURE__*/Object(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__["jsx"])(_context_ProductsContext__WEBPACK_IMPORTED_MODULE_2__[/* ProductsProvider */ "b"], {
+    children: /*#__PURE__*/Object(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__["jsx"])(_context_CartContext__WEBPACK_IMPORTED_MODULE_3__[/* CartProvider */ "b"], {
+      children: /*#__PURE__*/Object(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__["jsx"])(Component, _objectSpread({}, pageProps))
+    })
+  });
 }
+
+/***/ }),
+
+/***/ "6tQU":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+const host = process.env.NEXT_PUBLIC_HOST || "http://localhost:1337";
+/* harmony default export */ __webpack_exports__["a"] = (host);
 
 /***/ }),
 
@@ -146,10 +166,118 @@ module.exports = require("react/jsx-runtime");
 
 /***/ }),
 
+/***/ "VAPu":
+/***/ (function(module, exports) {
+
+
+
+/***/ }),
+
 /***/ "cDcd":
 /***/ (function(module, exports) {
 
 module.exports = require("react");
+
+/***/ }),
+
+/***/ "mk7R":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProductsContext; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return ProductsProvider; });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("F5FC");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("cDcd");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _utils_host__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("6tQU");
+
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+const ProductsContext = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createContext(undefined);
+class ProductsProvider extends react__WEBPACK_IMPORTED_MODULE_1__["Component"] {
+  constructor(...args) {
+    super(...args);
+
+    _defineProperty(this, "state", {});
+  }
+
+  componentDidMount() {
+    fetch(`${_utils_host__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"]}/products`).then(res => res.json()).then(data => this.setState({
+      data
+    })).catch(err => console.log(err));
+  }
+
+  render() {
+    return /*#__PURE__*/Object(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__["jsx"])(ProductsContext.Provider, {
+      value: this.state,
+      children: this.props.children
+    });
+  }
+
+}
+
+/***/ }),
+
+/***/ "xKSj":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CartContext; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return CartProvider; });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("F5FC");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("cDcd");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+const CartContext = /*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_1__["createContext"])(null);
+const CartProvider = props => {
+  const {
+    0: state,
+    1: setState
+  } = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])({
+    setItem: function (item) {
+      setState(old => _objectSpread(_objectSpread({}, old), {}, {
+        cartItems: [...old.cartItems, item]
+      }));
+    },
+    removeItem: function (item) {
+      setState(old => _objectSpread(_objectSpread({}, old), {}, {
+        cartItems: old.cartItems.filter(cartItem => cartItem.name !== item.name)
+      }));
+    },
+    cartItems: []
+  });
+  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(() => {
+    const cartItems = localStorage.getItem("cartItems");
+
+    if (cartItems) {
+      setState(_objectSpread(_objectSpread({}, state), {}, {
+        cartItems: JSON.parse(cartItems)
+      }));
+    }
+  }, []);
+  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(() => {
+    if (state.cartItems) {
+      localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
+    }
+  }, [state]);
+  return /*#__PURE__*/Object(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__["jsx"])(CartContext.Provider, {
+    value: state,
+    children: props.children
+  });
+};
 
 /***/ })
 

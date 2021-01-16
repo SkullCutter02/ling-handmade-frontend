@@ -45,6 +45,7 @@ const Product = ({
           justify-content: space-evenly;
           align-items: center;
           flex-direction: column;
+          height: 350px;
         }
 
         a {
@@ -118,8 +119,16 @@ const Product = ({
           background: none;
         }
 
-        @media screen and (max-width: 500px) {
-          margin-bottom: 15px;
+        @media screen and (max-width: 700px) {
+          button {
+            font-size: 0.6rem;
+          }
+        }
+
+        @media screen and (max-width: 600px) {
+          button {
+            font-size: 0.8rem;
+          }
         }
       `}</style>
     </React.Fragment>

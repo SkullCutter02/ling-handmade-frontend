@@ -6,21 +6,27 @@ import Header from "../components/Header";
 import Information from "../components/Information";
 import Featured from "../components/Featured";
 import SectionTitle from "../components/SectionTitle";
-import { Provider } from "../context";
+import ContactUs from "../components/ContactUs";
+import { ProductsProvider } from "../context/ProductsContext";
+import { whyChooseHandmadeSoap, whyChooseLHM } from "../utils/informationText";
 
 const Home = () => {
   return (
-    <Provider>
+    <ProductsProvider>
       <Head>
         <link rel="shortcut icon" href="#" />
       </Head>
       <Layout>
         <Header titleText={"Ling Handmade"} imgSrc={"/download.jpeg"} />
         <Featured />
+        <SectionTitle titleText={"Why handmade soaps?"} />
+        <Information info={whyChooseHandmadeSoap} />
         <SectionTitle titleText={"Why choose LHM?"} />
-        <Information />
+        <Information info={whyChooseLHM} />
+        <SectionTitle titleText={"Contact Us"} />
+        <ContactUs />
       </Layout>
-    </Provider>
+    </ProductsProvider>
   );
 };
 

@@ -2,10 +2,12 @@ import React, { useContext, useState, useEffect } from "react";
 
 import SectionTitle from "./SectionTitle";
 import Product from "./Product";
-import { Context } from "../context";
+import { ProductsContext } from "../context/ProductsContext";
+import spinner from "../utils/spinner";
+import host from "../utils/host";
 
 const Featured = () => {
-  const products = useContext(Context).data;
+  const products = useContext(ProductsContext).data;
   const [featured, setFeatured] = useState();
 
   useEffect(() => {
@@ -18,14 +20,18 @@ const Featured = () => {
     <React.Fragment>
       <section>
         <SectionTitle titleText={"Featured"} />
-        <div className="grid-container">
-          {featured ? (
-            featured.map((product) => {
+        {featured ? (
+          <div className="grid-container">
+            {featured.map((product) => {
               return (
                 <Product
                   key={product.id}
                   product={product}
-                  imgSrc={`http://localhost:1337${product.photo.formats.medium.url}`}
+                  imgSrc={`${
+                    host === "http://localhost:1337"
+                      ? "http://localhost:1337"
+                      : ""
+                  }${product.photo.formats.medium.url}`}
                   alternativeTxt={product.photo.alternativeText}
                   name={product.name}
                   price={product.price}
@@ -33,16 +39,15 @@ const Featured = () => {
                   productSlug={product.slug}
                 />
               );
-            })
-          ) : (
-            <div style={{ margin: "0 auto" }}>Loading...</div>
-          )}
-        </div>
+            })}
+          </div>
+        ) : (
+          <img className="spinner" src={spinner} alt="Spinner" />
+        )}
       </section>
 
       <style jsx>{`
         section {
-          height: auto;
           background: white;
           padding: 1px 0;
         }
@@ -57,7 +62,7 @@ const Featured = () => {
 
         @media screen and (max-width: 900px) {
           section {
-            height: 750px;
+            height: 840px;
           }
 
           .grid-container {
@@ -67,23 +72,11 @@ const Featured = () => {
 
         @media screen and (max-width: 700px) {
           section {
-            height: 1400px;
+            height: 1170px;
           }
 
           .grid-container {
             grid-template-columns: 1fr;
-          }
-        }
-
-        @media screen and (max-width: 600px) {
-          section {
-            height: 1300px;
-          }
-        }
-
-        @media screen and (max-width: 370px) {
-          section {
-            height: 1100px;
           }
         }
       `}</style>

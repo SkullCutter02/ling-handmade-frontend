@@ -1,11 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 
-import { Context } from "../context";
+import { ProductsContext } from "../context/ProductsContext";
 import Product from "./Product";
 import SectionTitle from "./SectionTitle";
+import spinner from "../utils/spinner";
+import host from "../utils/host";
 
 const Products = ({ category }) => {
-  const data = useContext(Context).data;
+  const data = useContext(ProductsContext).data;
   const [products, setProducts] = useState();
 
   useEffect(() => {
@@ -18,18 +20,22 @@ const Products = ({ category }) => {
 
   return (
     <React.Fragment>
-      <SectionTitle
-        titleText={
-          category && category.charAt(0).toUpperCase() + category.slice(1)
-        }
-      />
-      <div className="grid-container">
-        {products ? (
-          products.map((product) => {
+      {products && (
+        <SectionTitle
+          titleText={(products && products[0]?.categories[0].name) || category}
+        />
+      )}
+      {products ? (
+        <div className="grid-container">
+          {products.map((product) => {
             return (
               <Product
                 key={product.id}
-                imgSrc={`http://localhost:1337${product.photo.formats.medium.url}`}
+                imgSrc={`${
+                  host === "http://localhost:1337"
+                    ? "http://localhost:1337"
+                    : ""
+                }${product.photo.formats.medium.url}`}
                 alternativeTxt={product.photo.alternativeText}
                 name={product.name}
                 price={product.price}
@@ -37,11 +43,11 @@ const Products = ({ category }) => {
                 productSlug={product.slug}
               />
             );
-          })
-        ) : (
-          <div>Loading...</div>
-        )}
-      </div>
+          })}
+        </div>
+      ) : (
+        <img className="spinner" src={spinner} alt="spinner" />
+      )}
 
       <style jsx>{`
         .grid-container {

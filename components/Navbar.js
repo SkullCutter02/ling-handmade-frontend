@@ -1,5 +1,7 @@
 import React from "react";
 import Link from "next/link";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 
 const Navbar = () => {
   return (
@@ -17,12 +19,21 @@ const Navbar = () => {
             </Link>
           </li>
         </ul>
+        <Link href={"/cart"}>
+          <div className="icon">
+            <FontAwesomeIcon icon={faShoppingCart} color={"grey"} size={"2x"} />
+          </div>
+        </Link>
       </nav>
 
       <style jsx>{`
         nav {
           height: 50px;
           background: #dabc97;
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
         }
 
         ul {
@@ -42,6 +53,31 @@ const Navbar = () => {
           color: black;
           font-size: 1.6rem;
           padding: 0.5em;
+        }
+
+        .icon {
+          cursor: pointer;
+          margin-right: 40px;
+        }
+
+        @media screen and (max-width: 500px) {
+          nav {
+            height: 130px;
+            flex-direction: column;
+          }
+
+          ul {
+            flex-direction: column;
+            justify-content: space-evenly;
+          }
+
+          li {
+            margin: 0 auto;
+          }
+
+          .icon {
+            margin: 10px 0;
+          }
         }
       `}</style>
     </React.Fragment>
