@@ -125,9 +125,11 @@ const ProductPage = ({ slug }) => {
               <aside>
                 <div className="price-add-cart">
                   <h2>Price: ${product?.price}</h2>
-                  {cartContext?.cartItems?.some(
-                    (item) => product.name === item.name
-                  ) ? (
+                  {product.soldOut ? (
+                    <button className="add-cart-btn sold-out">Sold Out</button>
+                  ) : cartContext?.cartItems?.some(
+                      (item) => product.name === item.name
+                    ) ? (
                     <Link href={"/cart"}>
                       <button className="add-cart-btn in-cart">In Cart</button>
                     </Link>
@@ -307,6 +309,15 @@ const ProductPage = ({ slug }) => {
 
         .in-cart:hover {
           background: #04a204;
+        }
+
+        .sold-out {
+          background: #b10a0a;
+          cursor: initial;
+        }
+
+        .sold-out:hover {
+          background: #b10a0a;
         }
 
         // Media Queries
