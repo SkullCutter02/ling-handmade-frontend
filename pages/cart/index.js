@@ -3,27 +3,37 @@ import Link from "next/link";
 
 import Layout from "../../components/Layout";
 import { CartContext } from "../../context/CartContext";
-import spinner from "../../utils/spinner";
 import host from "../../utils/host";
+import { useRouter } from "next/router";
 
 const CartPage = () => {
   const [totalCost, setTotalCost] = useState(0);
 
   const cartContext = useContext(CartContext);
 
+  const router = useRouter();
+
+  const findAmount = (cartItem) => {
+    return cartContext.cartItemsAmount[
+      cartContext.cartItems.findIndex(
+        (cartContextItem) => cartContextItem.name === cartItem.name
+      )
+    ];
+  };
+
   useEffect(() => {
     if (cartContext !== undefined) {
       if (cartContext.cartItems.length > 0) {
         let accumulator = 0;
         cartContext.cartItems.forEach((item) => {
-          accumulator += item.price;
+          accumulator += item.price * findAmount(item);
         });
         setTotalCost(accumulator);
       } else {
         setTotalCost(0);
       }
     }
-  }, [cartContext.cartItems]);
+  }, [cartContext.cartItems, cartContext.cartItemsAmount]);
 
   const removeFromCart = (cartItem) => {
     if (cartContext) {
@@ -37,7 +47,7 @@ const CartPage = () => {
         <div className="container">
           {cartContext ? (
             cartContext.cartItems.map((cartItem) => (
-              <div className="cart-item-container">
+              <div className="cart-item-container" key={cartItem.uuid}>
                 <div className="left">
                   <img
                     className="item-img"
@@ -61,9 +71,30 @@ const CartPage = () => {
                     </p>
                   </div>
                   <div className="price-remove-cart-btn">
-                    <p className="product-price">${cartItem.price}</p>
+                    <div className="product-amt">
+                      <span
+                        className="add"
+                        onClick={() => cartContext.incrAmt(cartItem)}
+                      >
+                        +
+                      </span>
+                      <span className="amt">{findAmount(cartItem)}</span>
+                      <span
+                        className="subtract"
+                        onClick={() => {
+                          if (findAmount(cartItem) > 1) {
+                            cartContext.decrAmt(cartItem);
+                          }
+                        }}
+                      >
+                        –
+                      </span>
+                    </div>
+                    <p className="product-price">
+                      ${cartItem.price * findAmount(cartItem)}
+                    </p>
                     <button
-                      className="remove-cart-btn"
+                      className="remove-cart-btn btn"
                       onClick={() => removeFromCart(cartItem)}
                     >
                       Remove from Cart
@@ -75,13 +106,21 @@ const CartPage = () => {
           ) : (
             <img className="spinner" src={spinner} alt="spinner" />
           )}
-          <div className="cart-info">
-            <p>
-              {cartContext?.cartItems.length === 0
-                ? null
-                : `Total: ${totalCost}`}
-            </p>
-          </div>
+          {cartContext.cartItems.length > 0 && (
+            <div className="cart-info">
+              <p>${totalCost}</p>
+              <button
+                className="checkout-cart-btn bin"
+                onClick={async () => {
+                  if (totalCost > 0) {
+                    await router.push("/cart/checkout");
+                  }
+                }}
+              >
+                Checkout
+              </button>
+            </div>
+          )}
         </div>
       </Layout>
 
@@ -142,14 +181,35 @@ const CartPage = () => {
           align-items: center;
           align-self: flex-end;
           justify-content: flex-end;
-          width: 30%;
         }
 
         .product-price {
           font-size: 1.2rem;
         }
 
-        .remove-cart-btn {
+        .product-amt {
+          border: 0.7px solid #b1b1b1;
+          width: 60px;
+          display: grid;
+          grid-template-columns: 2.5fr 3fr 2.5fr;
+          margin-right: 15px;
+        }
+
+        .product-amt span {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .subtract,
+        .add {
+          cursor: pointer;
+          background: #b1b1b1;
+          color: #fff;
+        }
+
+        .remove-cart-btn,
+        .checkout-cart-btn {
           cursor: pointer;
           min-width: 100px;
           height: 25px;
@@ -165,8 +225,18 @@ const CartPage = () => {
           background: #ab0f0f;
         }
 
+        .checkout-cart-btn {
+          background: #15cb15;
+        }
+
+        .checkout-cart-btn:hover {
+          background: #16ae16;
+        }
+
         .cart-info {
-          float: right;
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
           transform: translateY(-20px);
           font-size: 1.3rem;
         }
