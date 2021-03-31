@@ -8,7 +8,7 @@ const CheckoutSuccessPage = () => {
     <React.Fragment>
       <Layout>
         <div className="checkout-success-container">
-          <h1>Checkout Successful!</h1>
+          <h1>Your Order has been sent to the Company!</h1>
           <Link href={"/"}>
             <p>Return to Home</p>
           </Link>
@@ -26,6 +26,10 @@ const CheckoutSuccessPage = () => {
           justify-content: center;
           align-items: center;
           flex-direction: column;
+        }
+
+        h1 {
+          text-align: center;
         }
 
         p {

@@ -46,9 +46,9 @@ const CheckoutPage = () => {
     let str = "";
 
     cartContext.cartItems.forEach((cartItem) => {
-      str += `Item: ${cartItem} || Amount: ${findAmount(
+      str += `Item: ${cartItem.name} || Amount: ${findAmount(
         cartItem
-      )} || Total Price: ${cartItem.price * findAmount(cartItem)}\n`;
+      )} || Total Price: ${cartItem.price * findAmount(cartItem)}<br/>`;
     });
 
     return str;
@@ -122,6 +122,7 @@ const CheckoutPage = () => {
                 <SpinnerButton
                   text={"Confirm Place Order"}
                   isLoading={isLoading}
+                  buttonType={"submit"}
                 />
               </div>
             </form>

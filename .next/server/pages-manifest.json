@@ -2,9 +2,6 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/cart/checkout/success": "pages/cart/checkout/success.js",
   "/cart/checkout": "pages/cart/checkout.js",
-  "/products/[category]/[slug]": "pages/products/[category]/[slug].js",
-  "/cart": "pages/cart.js",
-  "/": "pages/index.js"
+  "/cart/checkout/success": "pages/cart/checkout/success.js"
 }
