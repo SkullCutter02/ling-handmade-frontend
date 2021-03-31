@@ -74,7 +74,11 @@ const CartPage = () => {
                     <div className="product-amt">
                       <span
                         className="add"
-                        onClick={() => cartContext.incrAmt(cartItem)}
+                        onClick={() => {
+                          if (findAmount(cartItem) < cartItem.amountLeft) {
+                            cartContext.incrAmt(cartItem);
+                          }
+                        }}
                       >
                         +
                       </span>

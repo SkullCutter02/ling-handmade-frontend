@@ -125,7 +125,7 @@ const ProductPage = ({ slug }) => {
               <aside>
                 <div className="price-add-cart">
                   <h2>Price: ${product?.price}</h2>
-                  {product.soldOut ? (
+                  {product?.amountLeft <= 0 ? (
                     <button className="add-cart-btn sold-out">Sold Out</button>
                   ) : cartContext?.cartItems?.some(
                       (item) => product.name === item.name
@@ -141,6 +141,7 @@ const ProductPage = ({ slug }) => {
                       Add to Cart
                     </button>
                   )}
+                  <p>{product?.amountLeft || 0} left</p>
                 </div>
                 <h4>
                   <strong>Ingredients:</strong> {product?.ingredients}
